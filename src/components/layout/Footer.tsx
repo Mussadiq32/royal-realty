@@ -156,16 +156,33 @@ const Footer = () => {
             </form>
           </motion.div>
           
-          {/* Copyright */}
-          <div className="mt-16 pt-8 border-t border-white/10 text-center text-royal-100/70 text-sm">
-            <p>© {currentYear} Royal Group of Real Estates. All rights reserved.</p>
-            <p className="mt-2">
-              <span className="text-royal-100/50">Crafted with ❤️ by </span>
-              <a href="https://www.linkedin.com/in/mussadiq-wani" target="_blank" rel="noopener noreferrer" className="text-gold-400 hover:text-gold-300 transition-colors duration-300 font-medium">
-                Mussadiq Wani
-              </a>
-            </p>
-          </div>
+          {/* Cities */}
+          <motion.div variants={itemVariants} className="backdrop-blur-lg bg-white/5 p-8 rounded-2xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:bg-white/10">
+            <h3 className="text-xl font-semibold mb-6 text-white relative inline-block">
+              Cities
+              <div className="absolute -bottom-2 left-0 w-3/4 h-0.5 bg-gradient-to-r from-gold-400 to-transparent"></div>
+            </h3>
+            <ul className="space-y-3">
+              {cities.map((city, index) => (
+                <motion.li key={index} whileHover={{ x: 8 }} className="transform hover:scale-105 transition-all duration-300">
+                  <a href={city.link} className="flex items-center text-royal-100 hover:text-white transition-colors duration-300 text-sm group">
+                    <ChevronRight className="w-4 h-4 mr-2 text-gold-400 group-hover:text-gold-300 transition-colors duration-300" />
+                    {city.name}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* Copyright Section */}
+        <div className="mt-16 pt-8 border-t border-white/10 text-center">
+          <p className="text-royal-100/70 text-sm">
+            © {currentYear} Royal Group of Real Estates. All rights reserved.
+          </p>
+          <p className="text-royal-100/70 text-sm mt-2">
+            Crafted with ❤️ by Mussadiq Wani
+          </p>
         </div>
       </motion.div>
     </footer>
