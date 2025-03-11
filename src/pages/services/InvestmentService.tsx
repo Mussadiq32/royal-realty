@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
 import { Mail, Phone, ArrowRight, BarChart, TrendingUp, Shield, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 
 const InvestmentService = () => {
   useEffect(() => {
