@@ -21,7 +21,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { Pencil, Trash2, Eye } from 'lucide-react';
 import PropertyForm from './PropertyForm';
 
