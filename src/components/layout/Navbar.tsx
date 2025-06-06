@@ -48,63 +48,104 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 backdrop-blur-sm ${isScrolled ? 'bg-white/90 dark:bg-royal-900/90 shadow-lg py-4' : 'bg-transparent py-6'}`}>
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center transition-transform hover:scale-105">
+    <header 
+      className={`
+        fixed w-full z-50 transition-all duration-500
+        before:absolute before:inset-0 before:w-full before:h-full 
+        before:backdrop-blur-md before:bg-gradient-to-b 
+        ${isScrolled 
+          ? 'before:from-white/80 before:to-white/60 dark:before:from-royal-900/80 dark:before:to-royal-900/60 shadow-lg py-4 translate-y-0' 
+          : 'before:from-transparent before:to-transparent py-6 -translate-y-1'}
+        hover:translate-y-0 motion-safe:animate-subtle-bounce
+      `}
+    >
+      <div className="container mx-auto px-4 flex justify-between items-center relative z-10">
+        <Link 
+          to="/" 
+          className="flex items-center transition-all duration-300 hover:scale-110 hover:rotate-1"
+        >
           <img 
             src={isScrolled ? "https://iili.io/2mPx3rP.png" : "https://iili.io/2mPxFWb.png"} 
             alt="Royal Group of Real Estates Logo" 
-            className="h-10 md:h-12"
+            className="h-10 md:h-12 transition-all duration-500"
           />
         </Link>
         
         <nav className={`hidden lg:flex space-x-8 ${isScrolled ? 'text-royal-800 dark:text-white' : 'text-white'}`}>
-          <Link 
-            to="/" 
-            className="relative font-medium hover:text-gold-500 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            Home
-          </Link>
-          <Link 
-            to="/properties" 
-            className="relative font-medium hover:text-gold-500 transition-all duration-300 hover:-translate-y-0.5"
-          >
-            Properties
-          </Link>
+          {[
+            { to: "/", label: "Home" },
+            { to: "/properties", label: "Properties" }
+          ].map((link) => (
+            <Link 
+              key={link.to}
+              to={link.to} 
+              className="
+                relative font-medium transition-all duration-300
+                hover:text-gold-500 hover:scale-110
+                before:absolute before:-bottom-1 before:left-0 
+                before:w-full before:h-0.5 before:origin-right
+                before:transform before:scale-x-0 before:bg-gold-500
+                before:transition-transform before:duration-300
+                hover:before:origin-left hover:before:scale-x-100
+              "
+            >
+              {link.label}
+            </Link>
+          ))}
           <div className="relative group">
             <button 
               onClick={toggleDropdown}
-              className="flex items-center font-medium group-hover:text-gold-500 transition-all duration-300 hover:-translate-y-0.5"
+              className="
+                flex items-center font-medium
+                transition-all duration-300
+                hover:text-gold-500 hover:scale-110
+                group-hover:text-gold-500
+              "
             >
               Services
-              <ChevronDown size={16} className="ml-1 transition-transform duration-300 group-hover:rotate-180" />
+              <ChevronDown 
+                size={16} 
+                className="
+                  ml-1 transition-transform duration-300 
+                  group-hover:rotate-180 group-hover:text-gold-500
+                "
+              />
             </button>
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white/95 dark:bg-royal-900/95 backdrop-blur-sm rounded-lg shadow-xl py-2 z-20 animate-in fade-in-0 zoom-in-95 duration-200">
-                <Link 
-                  to="/services/buying" 
-                  className="block px-4 py-2 text-royal-800 dark:text-white hover:bg-gold-50 dark:hover:bg-royal-800/50 hover:text-gold-500 transition-colors duration-300"
-                >
-                  Buying Property
-                </Link>
-                <Link 
-                  to="/services/selling" 
-                  className="block px-4 py-2 text-royal-800 dark:text-white hover:bg-gold-50 dark:hover:bg-royal-800/50 hover:text-gold-500 transition-colors duration-300"
-                >
-                  Selling Property
-                </Link>
-                <Link 
-                  to="/services/renting" 
-                  className="block px-4 py-2 text-royal-800 dark:text-white hover:bg-gold-50 dark:hover:bg-royal-800/50 hover:text-gold-500 transition-colors duration-300"
-                >
-                  Renting Property
-                </Link>
-                <Link 
-                  to="/services/investment" 
-                  className="block px-4 py-2 text-royal-800 dark:text-white hover:bg-gold-50 dark:hover:bg-royal-800/50 hover:text-gold-500 transition-colors duration-300"
-                >
-                  Investment Advisory
-                </Link>
+              <div 
+                className="
+                  absolute top-full left-0 mt-2 w-48
+                  backdrop-blur-lg bg-white/20 dark:bg-royal-900/20
+                  rounded-lg shadow-2xl py-2 z-20
+                  border border-white/20 dark:border-royal-800/20
+                  animate-in fade-in-0 zoom-in-95 duration-200
+                  before:absolute before:inset-0 before:w-full before:h-full
+                  before:bg-gradient-to-b before:from-white/95 before:to-white/80
+                  dark:before:from-royal-900/95 dark:before:to-royal-900/80
+                  before:rounded-lg before:-z-10
+                "
+              >
+                {[
+                  { to: "/services/buying", label: "Buying Property" },
+                  { to: "/services/selling", label: "Selling Property" },
+                  { to: "/services/renting", label: "Renting Property" },
+                  { to: "/services/investment", label: "Investment Advisory" }
+                ].map((item, index) => (
+                  <Link 
+                    key={item.to}
+                    to={item.to} 
+                    className="
+                      block px-4 py-2 text-royal-800 dark:text-white
+                      hover:bg-gold-50/50 dark:hover:bg-royal-800/30
+                      hover:text-gold-500 transition-all duration-300
+                      transform hover:translate-x-2
+                      animate-in fade-in-0 slide-in-from-left
+                      style={{ animationDelay: `${index * 50}ms` }}
+                    "
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
             )}
           </div>
@@ -199,7 +240,7 @@ const Navbar = () => {
       </div>
       
       <div
-        className={`lg:hidden fixed inset-0 bg-gradient-to-b from-royal-800/98 to-royal-900/98 dark:from-royal-900/98 dark:to-black/98 backdrop-blur-sm z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed inset-0 bg-gradient-to-b from-royal-800/99 to-royal-900/99 dark:from-royal-900/99 dark:to-black/99 backdrop-blur-md z-50 transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
